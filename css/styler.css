@@ -1,0 +1,165 @@
+/* General Body & Background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2ecc71, #8e44ad); /* Green to Purple Gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+/* Main Container */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Form Container */
+form {
+    /* background: rgba(255, 255, 255, 0.15);  */
+    /* Slightly transparent white for the form */
+    /* padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);  */
+    /* Optional: for better background effect */
+
+    background: rgba(133, 133, 133, 0.2);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px); /* Adds frosted glass effect */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form Header */
+form h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Input and Select Fields */
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    align-content: center;
+}
+
+select{
+    width: 105%;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #582c8a; /* Purple on focus */
+}
+
+/* Submit Button */
+input[type="submit"] {
+    background: #672566; /* Green Background */
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    width: 105%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease-in-out;
+    
+}
+
+input[type="submit"]:hover {
+    background: #27ae60; /* Darker green on hover */
+}
+
+/* Additional Link */
+form p {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+form p a {
+    color: #871494;
+    text-decoration: none;
+}
+
+form p a:hover {
+    color: #8e44ad; /* Purple on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    form {
+        padding: 25px;
+        max-width: 350px;
+    }
+
+    form h3 {
+        font-size: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    input[type="submit"] {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    form h3 {
+        font-size: 18px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    input[type="submit"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

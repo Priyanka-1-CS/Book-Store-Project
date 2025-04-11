@@ -1,0 +1,298 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Default light background for the rest of the page */
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: rgba(47, 79, 79, 0.8); /* Semi-transparent Forest Green */
+    padding: 20px 0;
+    color: #fff;
+}
+
+header .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Allows header items to wrap on smaller screens */
+}
+
+header .logo {
+    font-size: 30px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Georgia', serif;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #98FB98; /* Light Green */
+}
+
+header .icons a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #3CB371; /* Medium Sea Green */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+header .icons a:hover {
+    background-color: #2E8B57; /* Dark Sea Green */
+}
+
+/* Main Content (Container) */
+.container {
+    max-width: 1200px; /* Updated to a reasonable max-width */
+    margin: 40px auto;
+    padding: 0 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    color: #fff; /* Make the text white to stand out against the background */
+    overflow: hidden; /* Prevent horizontal overflow */
+}
+
+h1 {
+    color: #fff; /* White text for headings */
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background for the table */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* Ensures the columns have a fixed width */
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+th {
+    background-color: #2F4F4F;
+    color: #fff;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) td {
+    background-color: #f0f8f0; /* Light green */
+}
+
+td .status {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.status.pending {
+    background-color: #FFD700; /* Gold */
+    color: #fff;
+}
+
+.status.completed {
+    background-color: #228B22; /* Forest Green */
+    color: #fff;
+}
+
+.status.failed {
+    background-color: #DC143C; /* Crimson */
+    color: #fff;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(47, 79, 79, 0.8); /* Semi-transparent Forest Green */
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer .box-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allows footer items to wrap on smaller screens */
+}
+
+footer .box {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px; /* Prevents boxes from becoming too small */
+}
+
+footer h3 {
+    font-size: 18px;
+    color: #98FB98; /* Light Green */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+footer a {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin: 8px 0;
+}
+
+footer a:hover {
+    color: #98FB98; /* Light Green */
+}
+
+footer p {
+    color: #ddd;
+}
+
+/* Credit Section */
+section.credit {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+section.credit span {
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    /* For medium screens (tablets, laptops) */
+    header .header {
+        padding: 15px 10px;
+    }
+
+    header nav a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    footer .box-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer .box {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* For smaller screens (mobile devices) */
+    header .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav a {
+        margin: 10px 0;
+    }
+
+    footer .box-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer .box {
+        margin-bottom: 20px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .container {
+        margin: 20px 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* For very small screens (extra small devices) */
+    body {
+        font-size: 14px; /* Adjust base font size */
+    }
+
+    header .logo {
+        font-size: 24px; /* Smaller logo size */
+    }
+
+    header nav a {
+        font-size: 14px; /* Smaller nav links */
+        margin: 5px 0;
+    }
+
+    footer .box-container {
+        padding: 10px 0;
+    }
+
+    footer .box {
+        margin-bottom: 15px;
+        min-width: 150px; /* Prevent footer boxes from becoming too small */
+    }
+
+    table th, table td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    /* Allow table scrolling horizontally */
+    table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+    }
+}

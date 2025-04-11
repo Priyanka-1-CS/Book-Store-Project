@@ -1,0 +1,361 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+
+body {
+    background-color: #f8f8f8; /* Light gray background for better contrast */
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header */
+header {
+    background-color: #334a14; /* Grass Green */
+    color: white;
+    padding: 20px 0;
+}
+
+.header {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    font-size:xx-large;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.header .icons a {
+    color: #fff;
+    padding: 10px 15px;
+    background-color: #e74c3c;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+nav a:hover {
+    background-color: #333;
+    color: #4CAF50;
+}
+
+
+/* Main Section */
+main {
+    padding: 20px;
+    margin-top: 10px; /* Ensure content does not overlap with the fixed header */
+}
+
+/* Table Styles for Cart */
+
+caption{
+    text-align: center;
+    background-color: #23a65a;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.cart-table th, .cart-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.cart-table th {
+    background-color: #23a65a;
+    color: white;
+}
+
+.cart-table td img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Checkout Form */
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-form input, .checkout-form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.checkout-form select {
+    text-align: center;
+}
+
+.checkout-form button {
+    background-color: #23a65a;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout-form button:hover {
+    background-color: #2ecc71;
+}
+
+/* Order Confirmation */
+.order-confirmation {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+.total-amount {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: right;
+}
+
+
+/* Footer */
+footer {
+    background-color: #334a14;
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.box-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 0px;
+}
+
+.box h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.box a {
+    color: white;
+    display: block;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 200;
+    transition: color 0.3s ease;
+}
+
+.box a:hover {
+    color: #6ab3d7;
+}
+
+.box p {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.credit {
+    font-size: 14px;
+    color: #f1f1f1;
+    margin-top: 0px;
+    margin-bottom: 0; /* Remove bottom margin */
+    background-color: rgb(0, 0, 0);
+    padding: 10px;
+    text-align: center;
+}
+
+section .credit{
+    margin-bottom: 0px;
+}
+
+.fas, .fab {
+    margin-right: 10px;
+}
+
+/* Social Media Icons Styling */
+.box .fab, .box .fas {
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.box .fab:hover, .box .fas:hover {
+    color: #f1f1f1;
+}
+.box .fab:hover, .box .fas:hover {
+    color: #f1f1f1;
+}
+
+
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    /* Adjust header size for tablets */
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .cart-table th, .cart-table td {
+        padding: 8px;
+    }
+
+    .checkout-form {
+        max-width: 90%;
+    }
+
+    .checkout-form input, .checkout-form select {
+        font-size: 14px;
+    }
+
+    .checkout-form button {
+        font-size: 14px;
+    }
+
+    .total-amount {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header adjustments for smaller screens */
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    /* Adjust cart table for smaller devices */
+    .cart-table th, .cart-table td {
+        font-size: 14px;
+    }
+
+    .cart-table td img {
+        width: 80px;
+        height: 120px;
+    }
+
+    .checkout-form {
+        width: 90%; /* Make the checkout form more responsive */
+        margin-top: 20px;
+    }
+
+    .checkout-form input, .checkout-form select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .checkout-form button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .order-confirmation {
+        padding: 15px;
+    }
+
+    .total-amount {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust header size for mobile */
+    header h1 {
+        font-size: 1rem;
+    }
+
+    /* Adjust cart table layout */
+    .cart-table th, .cart-table td {
+        font-size: 12px;
+    }
+
+    .cart-table td img {
+        width: 70px;
+        height: 100px;
+    }
+
+    /* Make the checkout form full-width */
+    .checkout-form {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .checkout-form input, .checkout-form select {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .checkout-form button {
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    .order-confirmation {
+        padding: 10px;
+    }
+
+    .total-amount {
+        font-size: 14px;
+    }
+}
