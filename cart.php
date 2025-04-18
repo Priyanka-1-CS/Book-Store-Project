@@ -109,7 +109,7 @@ if (isset($_GET['delete_all'])) {
                 <a href="bookstore.php" class="option-btn">Continue Shopping</a>
                 <a href="checkout.php" class="btn <?php echo ($grand_total > 0) ? '' : 'disabled'; ?>">Proceed to Checkout</a>
             </div>
-        </div> <!-- Fixed missing closing div tag -->
+        </div> 
     </section>
 
 

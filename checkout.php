@@ -30,8 +30,8 @@ try {
 
     // If no items in the cart, notify user and stop execution
     if (count($cart_items) === 0) {
-        // header("Location: chec")
-        echo "<p>Your cart is empty. Please add items to your cart before proceeding.</p>";
+        header("Location: cart.php");
+        // echo "<p>Your cart is empty. Please add items to your cart before proceeding.</p>";
         exit();
     }
 
