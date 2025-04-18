@@ -7,11 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         session_start();
-        require_once "includes/connect_db.inc.php"; // Database connection
+        require_once "includes/connect_db.inc.php"; 
 
         $errors = [];
 
-        // Check if email and password are not empty
+
         if (empty($email) || empty($pwd)) {
             $errors[] = "Email and password are required.";
         }
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $errors[] = "Invalid email or password.";
                     }
                 } else {
-                    // User not found
+                    
                     $errors[] = "Invalid email or password.";
                 }
             } catch (PDOException $e) {

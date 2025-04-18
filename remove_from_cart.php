@@ -1,5 +1,5 @@
 <?php
-// remove_from_cart.php
+
 session_start();
 include 'db.php';
 

@@ -1,8 +1,7 @@
 <?php
-// Start the session
+
 session_start();
 
-// Include the database connection
 require_once "includes/connect_db.inc.php";
 
 // Ensure the user is logged in

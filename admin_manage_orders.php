@@ -2,7 +2,7 @@
 session_start();
 require_once "includes/connect_db.inc.php";
 
-// Check if user is logged in and if they are an admin
+// Checking if user is logged in and if they are an admin
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_type"] !== "admin") {
     header("Location: index.php");
     exit();

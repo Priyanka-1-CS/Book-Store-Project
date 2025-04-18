@@ -1,7 +1,7 @@
 <?php
-// Include the database connection
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and validate form data
+    // Sanitizing and validate form data
     $uname = $_POST["uname"];
     $email = $_POST["email"];
     $pwd = $_POST["pwd"];
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(":email", $email);
                 $stmt->execute();
 
-                // Check if the email already exists
+                // Checking if the email already exists
                 if ($stmt->rowCount() > 0) {
                     $errors[] = "This email is already registered.";
                 } else {

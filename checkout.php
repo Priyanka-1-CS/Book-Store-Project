@@ -3,7 +3,7 @@ try {
     require_once "includes/connect_db.inc.php";
     session_start();
 
-    // Check if the user is logged in
+    // Checking if the user is logged in
     if (!isset($_SESSION["user_id"])) {
         header("Location: index.php"); // Redirect to login page if not logged in
         exit();
@@ -34,6 +34,7 @@ try {
         // echo "<p>Your cart is empty. Please add items to your cart before proceeding.</p>";
         exit();
     }
+
 
     // Handle form submission for placing the order
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

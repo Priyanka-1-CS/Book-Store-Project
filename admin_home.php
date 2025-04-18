@@ -4,7 +4,7 @@ session_start();
 
 require_once "includes/connect_db.inc.php";
 
-// Check if the user is logged in
+// Checking if the user is logged in
 if (!isset($_SESSION["user_id"])) {
     header("Location: index.php");  // Redirect to login page if user is not logged in
     exit();  // Always call exit() after a header redirect to stop further execution

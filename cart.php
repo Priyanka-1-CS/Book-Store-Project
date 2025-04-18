@@ -101,6 +101,7 @@ if (isset($_GET['delete_all'])) {
                 echo '<p class="empty">Your cart is empty.</p>';
             }
             ?>
+
         </div>
 
         <div class="cart-total">
