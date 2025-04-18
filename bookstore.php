@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Check if the user is logged in
+// Checking if the user is logged in
 if (!isset($_SESSION["user_id"])) {
     header("Location: index.php"); // Redirect to login page if not logged in
     exit();
@@ -10,7 +10,7 @@ if (!isset($_SESSION["user_id"])) {
 try {
     require_once "includes/connect_db.inc.php";
 
-    // Fetch products from the database
+    // Fetching products from the database
     $stmt = $pdo->prepare("SELECT book_id, title, author, price, description, image_url FROM books;");
     $stmt->execute();
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -19,9 +19,10 @@ try {
     exit();
 }
 
-// Process the "Add to Cart" form
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Check if the required POST data is set
+    // Checking if the required POST data is set
     if (isset($_POST['book_id'], $_POST['book_title'], $_POST['book_price'], $_POST['book_image'])) {
         $user_id = $_SESSION["user_id"];
         $book_id = $_POST["book_id"];
@@ -29,17 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $book_price = $_POST["book_price"];
         $book_image = $_POST["book_image"];
 
-        // Debugging: Output received POST data for troubleshooting
-        // var_dump($_POST); die();  // Uncomment to check POST data in the browser
-
+       
         try {
-            // Check if the product is already in the cart for this user
+            // Checking if the product is already in the cart for this user
             $stmt = $pdo->prepare("SELECT * FROM cart WHERE user_id = :user_id AND book_id = :book_id;");
             $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
             $cart_item = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // Debugging: Check cart item before updating or inserting
-            // var_dump($cart_item); die(); // Uncomment to check existing cart data
 
             if ($cart_item) {
                 // Update quantity if book is already in the cart
@@ -52,9 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt = $pdo->prepare("INSERT INTO cart (book_id, title, quantity, user_id, price, image) 
                     VALUES (:book_id, :book_title, 1, :user_id, :book_price, :book_image);");
 
-                // Debugging: Check what will be inserted
-                // var_dump($book_id, $book_title, $book_price, $book_image, $user_id); die();
-
+               
                 $stmt->execute([
                     'book_id' => $book_id,
                     'book_title' => $book_title,
@@ -89,13 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="css/stylehome.css"> -->
+    
     <style>
-        /* Global Styles */
-
-    /* ===========================
-   GENERAL RESET AND STYLES
-   =========================== */
+        
 * {
     margin: 0;
     padding: 0;
@@ -108,10 +98,10 @@ body {
     color: #333;
     line-height: 1.6;
     font-size: 16px;
-    background-color: #f8f8f8; /* Light gray background for general pages */
+    background-color: #f8f8f8; 
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure the body takes the full viewport height */
+    min-height: 100vh; 
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -124,11 +114,9 @@ a {
     color: inherit;
 }
 
-/* ===========================
-   HEADER STYLES
-   =========================== */
+
    header {
-    background-color: #334a14; /* Grass Green for Home and Cart */
+    background-color: #334a14; 
     color: white;
     padding: 20px 0;
     z-index: 1000; 
@@ -174,7 +162,7 @@ nav a {
     border-radius: 5px;
 }
 
-/* Social Media Icons */
+
 .header .icons a {
     color: #fff;
     padding: 10px 15px;
@@ -193,15 +181,13 @@ header .icons a:hover {
 }
 
 
-/* ===========================
-   MAIN CONTENT AREA STYLES
-   =========================== */
+
 main {
     padding: 40px 20px;
-    margin-top: 30px; /* Ensure content doesn't overlap with fixed header */
+    margin-top: 30px; 
 }
 
-/* Product List Heading */
+
 .product-list h1 {
     text-align: center;
     font-size: 36px;
@@ -210,7 +196,7 @@ main {
     color: black;
 }
 
-/* Container for Product Cards */
+
 .product-container {
     display: flex;
     flex-wrap: wrap;
@@ -218,7 +204,7 @@ main {
     gap: 20px;
 }
 
-/* Individual Product Cards */
+
 .product-card {
     background-color: #fff;
     border-radius: 8px;
@@ -226,33 +212,32 @@ main {
     width: 250px;
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s ease; /* Smooth scale effect */
+    transition: transform 0.3s ease; 
 }
 
 .product-card:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
+    transform: scale(1.05); 
 }
 
-/* Image inside product card */
+
 .product-card img {
     width: 100%;
     border-radius: 8px;
     margin-bottom: 15px;
 }
 
-/* Product name styling */
+
 .product-card h3 {
     font-size: 22px;
     margin-bottom: 10px;
 }
 
-/* Product description or price */
+
 .product-card p {
     font-size: 16px;
     margin-bottom: 10px;
 }
 
-/* Button inside product card */
 .product-card .btn {
     background-color: #27ae60;
     color: #fff;
@@ -266,16 +251,14 @@ main {
     background-color: #2ecc71;
 }
 
-/* ===========================
-   FOOTER STYLES
-   =========================== */
+
 footer {
     background-color: #334a14;
     color: #fff;
     padding: 40px 20px;
 }
 
-/* Footer container for boxes */
+
 footer {
     background-color: #334a14; 
     color: #fff;
@@ -289,19 +272,18 @@ footer .box-container {
     max-width: 1100px;
     margin: 0px auto;
     flex-wrap: wrap; 
-    /* Allows footer items to wrap on smaller screens */
 }
 
 footer .box {
     flex: 1;
     margin: 5px;
     background-color:#fafbfa00;
-    min-width: 200px; /* Prevents boxes from becoming too small */
+    min-width: 200px; 
 }
 
 footer h3 {
     font-size: 18px;
-    color: #ffffff; /* Light Green */
+    color: #ffffff; 
     margin-bottom: 20px;
     font-weight: bold;
     text-transform: uppercase;
@@ -315,7 +297,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #ef98fb; /* Light Green */
+    color: #ef98fb; 
 }
 
 footer p {
@@ -336,56 +318,49 @@ section.credit span {
 
 
  
-
-/* ===========================
-   RESPONSIVE STYLES
-   =========================== */
 @media (max-width: 768px) {
 
-    /* Adjusting header layout on small screens */
+
     header .header {
         flex-direction: column;
         align-items: center;
         padding: 10px 0;
     }
 
-    /* Adjust product card width for small screens */
     .product-card {
         width: 100%;
         max-width: 320px;
         margin-bottom: 20px;
     }
 
-    /* Footer boxes will stack on smaller screens */
+
     footer .box-container {
         flex-direction: column;
         align-items: center;
     }
 
-    /* Footer box widths are adjusted on smaller screens */
+   
     footer .box {
         width: 100%;
         max-width: 300px;
         text-align: center;
     }
 
-    /* Adjust main padding for small screens */
+    
     main {
         padding: 20px;
     }
 
-    /* Product list heading */
+   
     .product-list h1 {
         font-size: 28px;
     }
 }
 
-/* ===========================
-   ADDITIONAL STYLE FIXES FOR MOBILE
-   =========================== */
+
 @media (max-width: 480px) {
 
-    /* Adjusting text size for very small devices */
+  
     h1, h2, h3 {
         font-size: 18px;
     }
@@ -394,12 +369,10 @@ section.credit span {
         font-size: 20px;
     }
 
-    /* Reduce font size for footer */
     footer .box h3 {
         font-size: 18px;
     }
 
-    /* Button text size for mobile */
     .product-card .btn {
         font-size: 14px;
     }
@@ -444,7 +417,7 @@ section.credit span {
                             <p><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
                             <p><strong>Price:</strong> ₹<?php echo number_format($product['price'], 2); ?></p>
 
-                            <!-- Add to Cart Form -->
+                            
                             <form action="bookstore.php" method="POST">
                                 <input type="hidden" name="book_id" value="<?php echo $product['book_id']; ?>">
                                 <input type="hidden" name="book_title" value="<?php echo htmlspecialchars($product['title']); ?>">
