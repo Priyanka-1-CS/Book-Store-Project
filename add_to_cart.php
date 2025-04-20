@@ -1,9 +1,8 @@
 <?php
-// add_to_cart.php
 session_start();
 require_once "includes/connect_db.inc.php";
 
-// Check if the book_id is provided
+// Checking if the book_id is provided
 if (isset($_GET['book_id'])) {
     $book_id = (int) $_GET['book_id'];
     $user_session_id = session_id();

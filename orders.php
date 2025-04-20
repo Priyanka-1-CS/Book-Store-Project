@@ -52,7 +52,7 @@ $orders = getAllOrders($pdo, $user_id);
          <a href="bookstore.php">BookStore</a>
          <a href="orders.php">Orders</a>
          <a href="contact.php">Contact</a>
-         <a href="display_cart.php">Cart</a>
+         <a href="cart.php">Cart</a>
       </nav>
       <div class="icons">
         <?php 

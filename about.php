@@ -150,10 +150,10 @@ if (!isset($_SESSION["user_id"])) {
 </footer>
 
    <section class="credit">
+    <!-- Date('Y'): always shows the current year  -->
    <p>Copyright @ <?php echo date('Y'); ?> <span>Priyanka Mukherjee. All rights reserved</span></p>
    </section>
 
-<!-- custom js file link  -->
 <script src="js/script.js"></script>
 
 </body>

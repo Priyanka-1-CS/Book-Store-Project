@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="css/stylehome.css"> -->
+    
     <style>
         
 * {
@@ -417,7 +417,7 @@ section.credit span {
                             <p><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
                             <p><strong>Price:</strong> ₹<?php echo number_format($product['price'], 2); ?></p>
 
-                            <!-- Add to Cart Form -->
+                            
                             <form action="bookstore.php" method="POST">
                                 <input type="hidden" name="book_id" value="<?php echo $product['book_id']; ?>">
                                 <input type="hidden" name="book_title" value="<?php echo htmlspecialchars($product['title']); ?>">

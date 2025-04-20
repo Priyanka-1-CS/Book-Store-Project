@@ -96,3 +96,59 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+
+// For about.php
+// Wait for DOM to fully load
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Animate "Why choose us" section on scroll
+    const contentSection = document.querySelector('.homea .content');
+    
+    const revealContent = () => {
+        const rect = contentSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            contentSection.classList.add('visible');
+        }
+    };
+    
+    window.addEventListener('scroll', revealContent);
+    revealContent(); // In case it's already in view
+
+    // 2. Shrink header on scroll
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+            header.classList.add('shrink');
+        } else {
+            header.classList.remove('shrink');
+        }
+    });
+
+    // 3. Smooth scroll to sections
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // 4. Back to Top Button
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.textContent = '↑';
+    backToTopBtn.id = 'backToTop';
+    document.body.appendChild(backToTopBtn);
+
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
