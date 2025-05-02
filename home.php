@@ -53,9 +53,9 @@ $user_id = $_SESSION["user_id"];
       <nav>
          <a href="about.php">About</a>
          <a href="bookstore.php">BookStore</a>
-         <a href="orders.php">Orders</a>
-         <a href="contact.php">Contact</a>
+         <!-- <a href="contact.php">Contact</a> -->
          <a href="cart.php">Cart</a>
+         <a href="orders.php">Orders</a>
       </nav>
 
       <div class="icons">

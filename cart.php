@@ -54,10 +54,10 @@ if (isset($_GET['delete_all'])) {
         <div class="header">
             <a href="home.php" class="logo">𝕿𝖆𝖙𝖙𝖑𝖊𝕿𝖆𝖑𝖊</a>
             <nav>
+                <a href="home.php">Home</a>
                 <a href="about.php">About</a>
                 <a href="bookstore.php">Bookstore</a>
                 <a href="orders.php">Orders</a>
-                <a href="contact.php">Contact</a>
             </nav>
             <div class="icons">
                 <?php if (isset($_SESSION['user_id'])): ?>
