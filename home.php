@@ -89,7 +89,7 @@ $user_id = $_SESSION["user_id"];
       <h3>Quick Links</h3>
       <a href="about.php">About</a>
       <a href="shop.php">E-Store</a>
-      <a href="contact.php">Reach Out to us</a>
+      <a href="#">Reach Out to us</a>
    </div>
 
    <div class="box">
