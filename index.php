@@ -28,14 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($user) {
                     // Verify the password using password_verify
                     // If password verification fails, rehash the password and update in the database
-                        if (password_verify($pwd, $user['password']) === false) {
+                        if (password_verify($pwd, $user['pwd']) === false) {
                             // If the entered password does not match the hash in the database,
                             // rehash the password and update the database.
                             $newHashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
                             
                             // Update the password in the database with the new hash
-                            $stmt = $pdo->prepare("UPDATE bookstore.users SET password = :password WHERE email = :email");
-                            $stmt->bindParam(":password", $newHashedPassword);
+                            $stmt = $pdo->prepare("UPDATE bookstore.users SET pwd = :pwd WHERE email = :email");
+                            $stmt->bindParam(":pwd", $newHashedPassword);
                             $stmt->bindParam(":email", $email);
                             $stmt->execute();
 
@@ -43,10 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
 
                         // Now verify the password after it might have been rehashed
-                    if (password_verify($pwd, $user['password'])) {
+                    if (password_verify($pwd, $user["pwd"])) {
                         // Password matches, set session variables
                         $_SESSION["user_id"] = $user["id"];
-                        $_SESSION["user_name"] = $user["username"];
+                        $_SESSION["user_name"] = $user["uname"];
                         $_SESSION["user_type"] = $user["user_type"];
 
                         // // Redirect based on user type

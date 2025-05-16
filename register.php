@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $errors[] = "This email is already registered.";
                 } else {
                     // If the email does not exist, insert the new user into the database
-                    $insert_stmt = $pdo->prepare("INSERT INTO bookstore.users (username, password, email, user_type) 
-                                                  VALUES (:uname, :pwd, :email, :user_type);");
+                    $insert_stmt = $pdo->prepare("INSERT INTO bookstore.users (uname, email, pwd, user_type) 
+                                                  VALUES (:uname, :email, :pwd, :user_type);");
                     $insert_stmt->bindParam(":uname", $uname);
-                    $insert_stmt->bindParam(":pwd", $hashed_pwd);
                     $insert_stmt->bindParam(":email", $email);
+                    $insert_stmt->bindParam(":pwd", $hashed_pwd);
                     $insert_stmt->bindParam(":user_type", $user_type);
 
                     if ($insert_stmt->execute()) {
