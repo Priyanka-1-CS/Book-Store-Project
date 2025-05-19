@@ -474,3 +474,9 @@ section.credit span {
 
 </body>
 </html>
+
+
+
+<!-- CREATE TABLE `bookstore`.`books` (`book_id` INT(6) NOT NULL AUTO_INCREMENT , `title` VARCHAR(25) NOT NULL , `author` VARCHAR(25) NOT NULL , `price` INT(10) NOT NULL , `description` VARCHAR(80) NOT NULL , `image_url` VARCHAR NOT NULL , PRIMARY KEY (`book_id`)) ENGINE = InnoDB; -->
+
+<!-- CREATE TABLE `bookstore`.`cart` (`cart_id` INT(6) NOT NULL AUTO_INCREMENT , `book_id` INT(6) NOT NULL , `title` VARCHAR(50) NOT NULL , `quantity` INT(15) NOT NULL , `user_id` INT(6) NOT NULL , `price` INT(10) NOT NULL , `image` VARCHAR(100) NOT NULL , PRIMARY KEY (`cart_id`)) ENGINE = InnoDB; -->
