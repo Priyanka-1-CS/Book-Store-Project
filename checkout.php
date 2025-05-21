@@ -60,8 +60,8 @@ try {
             $quantities_str = implode(",", $quantities);
 
             // Insert order into orders table (with book_ids and quantities as comma-separated values)
-            $stmt = $pdo->prepare("INSERT INTO bookstore.orders (user_id, name, number, email, payment_method, address, total_price, order_date, payment_status, book_ids, quantities) 
-                                   VALUES (:user_id, :name, :number, :email, :payment_method, :address, :total_price, NOW(), 'Pending', :book_ids, :quantities)");
+            $stmt = $pdo->prepare("INSERT INTO bookstore.orders (user_id, name, number, email, payment_method, address, total_price, order_date, payment_status, book_id, quantity) 
+                                   VALUES (:user_id, :name, :number, :email, :payment_method, :address, :total_price, NOW(), 'Pending', :book_id, :quantity)");
 
             // Execute order insert
             $stmt->execute([
@@ -72,8 +72,8 @@ try {
                 'payment_method' => $payment_method,
                 'address' => $address,
                 'total_price' => $total_price,
-                'book_ids' => $book_ids_str,
-                'quantities' => $quantities_str
+                'book_id' => $book_ids_str,
+                'quantity' => $quantities_str
             ]);
 
             // Get the order ID of the inserted order
@@ -162,7 +162,7 @@ try {
                 <?php if (count($cart_items) > 0): ?>
                     <?php foreach ($cart_items as $item): ?>
                         <tr>
-                            <td><img src="/Book_Store/<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['title']); ?>"></td>
+                            <td><img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['title']); ?>"></td>
                             <td><?php echo htmlspecialchars($item['title']); ?></td>
                             <td><?php echo $item['quantity']; ?></td>
                             <td>₹<?php echo number_format($item['price'], 2); ?></td>

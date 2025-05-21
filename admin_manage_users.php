@@ -77,7 +77,7 @@ try {
                 <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($user['id']); ?></td>
-                        <td><?php echo htmlspecialchars($user['username']); ?></td>
+                        <td><?php echo htmlspecialchars($user['uname']); ?></td>
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         
                         <td><?php echo htmlspecialchars($user['user_type']); ?></td>
