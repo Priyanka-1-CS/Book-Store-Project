@@ -411,6 +411,7 @@ section.credit span {
                             <?php
                             $image_url = !empty($product['image_url']) ? $product['image_url'] : "default-image.jpg";
                             ?>
+                            
                             <img src="<?php echo $image_url; ?>" alt="<?php echo htmlspecialchars($product['title']); ?>">
                             <h3><?php echo htmlspecialchars($product['title']); ?></h3>
                             <p><strong>Author:</strong> <?php echo htmlspecialchars($product['author']); ?></p>
