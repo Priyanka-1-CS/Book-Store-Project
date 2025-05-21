@@ -77,8 +77,8 @@ $orders = getAllOrders($pdo, $user_id);
                 <th>Email</th>
                 <th>Payment Method</th>
                 <th>Address</th>
-                <th>Book IDs</th>
-                <th>Quantities</th>
+                <th>Book ID</th>
+                <th>Quantity</th>
                 <th>Total Price</th>
                 <th>Order Date</th>
                 <th>Payment Status</th>
@@ -96,8 +96,8 @@ $orders = getAllOrders($pdo, $user_id);
                         <td>{$order['email']}</td>
                         <td>{$order['payment_method']}</td>
                         <td>{$order['address']}</td>
-                        <td>{$order['book_ids']}</td>
-                        <td>{$order['quantities']}</td>
+                        <td>{$order['book_id']}</td>
+                        <td>{$order['quantity']}</td>
                         <td>₹{$order['total_price']}</td>
                         <td>{$order['order_date']}</td>
                         <td><span class='status {$payment_status}'>{$payment_status}</span></td>

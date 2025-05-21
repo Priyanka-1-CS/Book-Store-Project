@@ -84,7 +84,7 @@ if (isset($_GET['delete_all'])) {
                     ?>
                     <div class="cart-item">
                         <a href="cart.php?delete=<?php echo $fetch_cart['cart_id']; ?>" class="Delete" onclick="return confirm('Delete this from cart?');">Delete</a>
-                        <img src="/Book_Store/<?php echo htmlspecialchars($fetch_cart['image']); ?>" alt="">
+                        <img src="<?php echo htmlspecialchars($fetch_cart['image']); ?>" alt="">
                         <div class="name"><?php echo htmlspecialchars($fetch_cart['title']); ?></div>
                         <div class="price">₹<?php echo $fetch_cart['price']; ?>/-</div>
                         <form action="" method="post">
