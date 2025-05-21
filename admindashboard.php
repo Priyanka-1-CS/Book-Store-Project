@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_payment_status'
                     // Fetch and display each order in a table row
                     while ($order = $stmtLatestOrders->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
-                        echo "<td style='text-align: center;'>" . $order['id'] . "</td>";
+                        echo "<td style='text-align: center;'>" . $order['order_id'] . "</td>";
                         echo "<td style='text-align: center;'>" . $order["name"] . "</td>";
                         echo "<td style='text-align: center;'>" . $order['user_id'] . "</td>";
                         echo "<td style='text-align: center;'>" . $order['payment_status'] . "</td>";
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_payment_status'
                         // Display a form for updating payment status
                         echo "<td style='text-align: center;'>
                                 <form method='POST' action=''>
-                                    <input type='hidden' name='order_id' value='" . $order['id'] . "'>
+                                    <input type='hidden' name='order_id' value='" . $order['order_id'] . "'>
                                     <select name='payment_status' style='text-align: center;'>
                                         <option value='Paid' " . ($order['payment_status'] == 'Paid' ? 'selected' : '') . ">Paid</option>
                                         <option value='Pending' " . ($order['payment_status'] == 'Pending' ? 'selected' : '') . ">Pending</option>

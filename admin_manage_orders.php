@@ -23,7 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_order'])) {
 
 // Fetch all orders for management
 try {
-    $stmt = $pdo->query("SELECT * FROM bookstore.orders");
+    $stmt = $pdo->query("
+            SELECT 
+            o.order_id,
+            o.name,
+            o.email,
+            o.order_date,
+            o.total_price,
+            o.payment_status,
+            b.title AS book_title
+            FROM orders o
+            JOIN books b ON o.book_id = b.book_id
+        ");
 } catch (PDOException $e) {
     echo "Error fetching orders: " . $e->getMessage();
 }
@@ -78,17 +89,17 @@ try {
             <tbody>
                 <?php while ($order = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($order["id"]); ?></td>
+                        <td><?php echo htmlspecialchars($order["order_id"]); ?></td>
                         <td><?php echo htmlspecialchars($order["name"]); ?></td>
                         <td><?php echo htmlspecialchars($order['email']); ?></td>
-                        <td><?php echo htmlspecialchars($order['book_name']); ?></td>
+                        <td><?php echo htmlspecialchars($order['book_title']); ?></td>
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                         <td>₹<?php echo htmlspecialchars($order['total_price']); ?></td>
                         <td><?php echo htmlspecialchars($order["payment_status"]); ?></td>
                         <td>
-                        <a href="admin_view_order.php?order_id=<?php echo $order["id"]; ?>" class="view-btn"><button>View</button></a>
+                        <a href="admin_view_order.php?order_id=<?php echo $order["order_id"]; ?>" class="view-btn"><button>View</button></a>
                             <form action="admin_manage_orders.php" method="POST" style="display:inline;">
-                                <input type="hidden" name="order_id" value="<?php echo $order["id"]; ?>">
+                                <input type="hidden" name="order_id" value="<?php echo $order["order_id"]; ?>">
                                 <button type="submit" name="delete_order" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
                             </form>
                         </td>
