@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_payment_status'
 
     try {
         // Update payment status in the database
-        $stmtUpdate = $pdo->prepare("UPDATE bookstore.orders SET payment_status = :payment_status WHERE id = :order_id");
+        $stmtUpdate = $pdo->prepare("UPDATE bookstore.orders SET payment_status = :payment_status WHERE order_id = :order_id");
         $stmtUpdate->execute([':payment_status' => $newStatus, ':order_id' => $orderId]);
         $successMessage = "Payment status updated successfully!";
     } catch (PDOException $e) {

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_order'])) {
     $order_id = $_POST['order_id'];
 
     try {
-        $stmt = $pdo->prepare("DELETE FROM bookstore.orders WHERE id = :order_id");
+        $stmt = $pdo->prepare("DELETE FROM bookstore.orders WHERE order_id = :order_id");
         $stmt->bindParam(":order_id", $order_id);
         $stmt->execute();
     } catch (PDOException $e) {
@@ -24,17 +24,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_order'])) {
 // Fetch all orders for management
 try {
     $stmt = $pdo->query("
-            SELECT 
-            o.order_id,
-            o.name,
-            o.email,
-            o.order_date,
-            o.total_price,
-            o.payment_status,
-            b.title AS book_title
-            FROM orders o
-            JOIN books b ON o.book_id = b.book_id
-        ");
+        SELECT 
+    o.order_id,
+    o.name,
+    o.email,
+    o.order_date,
+    o.total_price,
+    o.payment_status,
+    GROUP_CONCAT(CONCAT(b.title, ' (x', oi.quantity, ')') SEPARATOR ', ') AS book_titles
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN books b ON oi.book_id = b.book_id
+GROUP BY o.order_id
+
+    ");
+
 } catch (PDOException $e) {
     echo "Error fetching orders: " . $e->getMessage();
 }
@@ -87,12 +91,18 @@ try {
                 </tr>
             </thead>
             <tbody>
+                <?php
+if ($stmt->rowCount() === 0) {
+    echo "<tr><td colspan='8' style='text-align:center;'>No orders found or data mismatch in JOINs.</td></tr>";
+}
+?>
+
                 <?php while ($order = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($order["order_id"]); ?></td>
                         <td><?php echo htmlspecialchars($order["name"]); ?></td>
                         <td><?php echo htmlspecialchars($order['email']); ?></td>
-                        <td><?php echo htmlspecialchars($order['book_title']); ?></td>
+                        <td><?php echo htmlspecialchars($order['book_titles']); ?></td>
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                         <td>₹<?php echo htmlspecialchars($order['total_price']); ?></td>
                         <td><?php echo htmlspecialchars($order["payment_status"]); ?></td>

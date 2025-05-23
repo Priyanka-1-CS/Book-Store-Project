@@ -8,54 +8,54 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_type"] !== "admin") {
     exit();
 }
 
-// Validate and fetch order_id (ensure it is integer)
-if (isset($_GET['order_id']) && ctype_digit($_GET['order_id'])) {
-    $order_id = (int)$_GET['order_id'];
+// Validate and get order ID
+if (!isset($_GET['order_id']) || !ctype_digit($_GET['order_id'])) {
+    echo "Invalid order ID!";
+    exit();
+}
 
-    try {
-        // Fetch main order details
-        $stmtOrder = $pdo->prepare("SELECT * FROM bookstore.orders WHERE order_id = :order_id");
-        $stmtOrder->bindParam(":order_id", $order_id, PDO::PARAM_INT);
-        $stmtOrder->execute();
-        $order = $stmtOrder->fetch(PDO::FETCH_ASSOC);
+$order_id = (int)$_GET['order_id'];
 
-        if (!$order) {
-            echo "Order not found!";
-            exit();
-        }
+// Fetch order info
+try {
+    $stmtOrder = $pdo->prepare("SELECT * FROM orders WHERE order_id = :order_id");
+    $stmtOrder->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+    $stmtOrder->execute();
+    $order = $stmtOrder->fetch(PDO::FETCH_ASSOC);
 
-        // Fetch ordered books using view_order_items
-        $stmtBooks = $pdo->prepare("
-            SELECT book_id, title, author, price, quantity
-            FROM bookstore.view_order_items
-            WHERE order_id = :order_id
-        ");
-        $stmtBooks->bindParam(":order_id", $order_id, PDO::PARAM_INT);
-        $stmtBooks->execute();
-        $books = $stmtBooks->fetchAll(PDO::FETCH_ASSOC);
-
-    } catch (PDOException $e) {
-        echo "Error fetching order details: " . $e->getMessage();
+    if (!$order) {
+        echo "Order not found!";
         exit();
     }
-} else {
-    echo "Invalid order ID!";
+
+    // Fetch books in the order
+    $stmtBooks = $pdo->prepare("
+        SELECT b.title, b.author, b.price, oi.quantity
+        FROM order_items oi
+        JOIN books b ON oi.book_id = b.book_id
+        WHERE oi.order_id = :order_id
+    ");
+    $stmtBooks->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+    $stmtBooks->execute();
+    $books = $stmtBooks->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
     exit();
 }
 
 // Handle payment status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_payment_status'])) {
-    // Sanitize and validate input
     $allowed_statuses = ['Paid', 'Pending', 'Failed'];
     $newStatus = $_POST['payment_status'] ?? '';
 
     if (!in_array($newStatus, $allowed_statuses, true)) {
-        echo "Invalid payment status value!";
+        echo "Invalid payment status!";
         exit();
     }
 
     try {
-        $stmtUpdate = $pdo->prepare("UPDATE bookstore.orders SET payment_status = :payment_status WHERE order_id = :order_id");
+        $stmtUpdate = $pdo->prepare("UPDATE orders SET payment_status = :payment_status WHERE order_id = :order_id");
         $stmtUpdate->bindParam(':payment_status', $newStatus);
         $stmtUpdate->bindParam(':order_id', $order_id, PDO::PARAM_INT);
         $stmtUpdate->execute();
@@ -63,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_payment_status
         header("Location: admin_view_order.php?order_id=$order_id");
         exit();
     } catch (PDOException $e) {
-        echo "Error updating payment status: " . $e->getMessage();
+        echo "Error updating status: " . $e->getMessage();
+        exit();
     }
 }
 ?>
@@ -102,62 +103,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_payment_status
 
         <div class="order-details">
             <table>
-                <tr>
-                    <th>Order ID</th>
-                    <td><?= htmlspecialchars($order['order_id']) ?></td>
-                </tr>
-                <tr>
-                    <th>Customer Name</th>
-                    <td><?= htmlspecialchars($order['name']) ?></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><?= htmlspecialchars($order['email']) ?></td>
-                </tr>
-                <tr>
-                    <th>Contact</th>
-                    <td><?= htmlspecialchars($order['number']) ?></td>
-                </tr>
+                <tr><th>Order ID</th><td><?= htmlspecialchars($order['order_id']) ?></td></tr>
+                <tr><th>Customer Name</th><td><?= htmlspecialchars($order['name']) ?></td></tr>
+                <tr><th>Email</th><td><?= htmlspecialchars($order['email']) ?></td></tr>
+                <tr><th>Contact</th><td><?= htmlspecialchars($order['number']) ?></td></tr>
                 <tr>
                     <th>Books Ordered</th>
                     <td>
                         <ul style="list-style-type: disc; padding-left: 20px;">
-                            <?php foreach ($books as $book): ?>
-                                <li>
-                                    <?= htmlspecialchars($book['title']) ?> 
-                                    by <?= htmlspecialchars($book['author']) ?> — 
-                                    <?= htmlspecialchars($book['quantity']) ?> × ₹<?= htmlspecialchars(number_format($book['price'], 2)) ?>
-                                </li>
-                            <?php endforeach; ?>
+                            <?php if (!empty($books)): ?>
+                                <?php foreach ($books as $book): ?>
+                                    <li>
+                                        <?= htmlspecialchars($book['title']) ?> 
+                                        by <?= htmlspecialchars($book['author']) ?> — 
+                                        <?= $book['quantity'] ?> × ₹<?= number_format($book['price'], 2) ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li>No books found in this order.</li>
+                            <?php endif; ?>
                         </ul>
                     </td>
                 </tr>
-                <tr>
-                    <th>Order Date Time</th>
-                    <td><?= htmlspecialchars($order['order_date']) ?></td>
-                </tr>
-                <tr>
-                    <th>Total Price</th>
-                    <td>₹<?= htmlspecialchars(number_format($order['total_price'], 2)) ?></td>
-                </tr>
-                <tr>
-                    <th>Payment Mode</th>
-                    <td><?= htmlspecialchars($order['payment_method']) ?></td>
-                </tr>
-                <tr>
-                    <th>Payment Status</th>
-                    <td><?= htmlspecialchars($order['payment_status']) ?></td>
-                </tr>
+                <tr><th>Order Date Time</th><td><?= htmlspecialchars($order['order_date']) ?></td></tr>
+                <tr><th>Total Price</th><td>₹<?= number_format($order['total_price'], 2) ?></td></tr>
+                <tr><th>Payment Mode</th><td><?= htmlspecialchars($order['payment_method']) ?></td></tr>
+                <tr><th>Payment Status</th><td><?= htmlspecialchars($order['payment_status']) ?></td></tr>
             </table>
 
             <form style="text-align: center;" action="admin_view_order.php?order_id=<?= $order_id ?>" method="POST">
-                <label style="font-weight: bold;" for="payment_status">Update Payment Status </label>
-                <select name="payment_status" id="payment_status" style="border-radius: 5px; padding:5px; text-align:center;">
-                    <option value="Paid" <?= ($order['payment_status'] === 'Paid' ? 'selected' : '') ?>>Paid</option>
-                    <option value="Pending" <?= ($order['payment_status'] === 'Pending' ? 'selected' : '') ?>>Pending</option>
-                    <option value="Failed" <?= ($order['payment_status'] === 'Failed' ? 'selected' : '') ?>>Failed</option>
+                <label for="payment_status"><b>Update Payment Status</b></label>
+                <select name="payment_status" id="payment_status" style="border-radius: 5px; padding:5px;">
+                    <option value="Paid" <?= $order['payment_status'] === 'Paid' ? 'selected' : '' ?>>Paid</option>
+                    <option value="Pending" <?= $order['payment_status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
+                    <option value="Failed" <?= $order['payment_status'] === 'Failed' ? 'selected' : '' ?>>Failed</option>
                 </select>
-                <button style="font-weight: bold;" type="submit" name="update_payment_status">Update Status</button>
+                <button type="submit" name="update_payment_status"><b>Update Status</b></button>
             </form>
         </div>
     </main>
@@ -169,8 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_payment_status
     </footer>
 </body>
 </html>
-
-
 
 
 
