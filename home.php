@@ -20,32 +20,11 @@ $user_id = $_SESSION["user_id"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/gen_style.css">
-    <style>
-       button {
-    background-color:rgb(157, 17, 113);;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5%;
-    font-size: 24px;
-    cursor: pointer;
-    border-radius: 9px;
-    transition: background-color 0.3s ease;
-    align-self: center;
-    font-weight: bolder;
-    text-transform: uppercase;
-    }
-
-    button:hover{
-    text-decoration: none;
-    color: #fff;
-    background-color: blueviolet;
-    }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
     <title>Home</title>
 </head>
 <body>
+   
 <header>
    <div class="header">
       <a href="home.php" class="logo">𝕿𝖆𝖙𝖙𝖑𝖊𝕿𝖆𝖑𝖊</a>

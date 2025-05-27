@@ -35,9 +35,7 @@ $orders = getAllOrders($pdo, $user_id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Link to External CSS -->
-    <!-- Ensure the CSS file path is correct relative to this page -->
-    <link rel="stylesheet" href="css/gen_style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Orders - Online Bookstore</title>
 </head>

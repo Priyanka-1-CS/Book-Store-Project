@@ -19,57 +19,7 @@ if (!isset($_SESSION["user_id"])) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>about</title>
 
-   <link rel="stylesheet" href="css/gen_style.css">
-   <style>
-   .homea {
-    position: relative;
-    text-align: center;
-    margin-top: 120px;
-}
-
-.bg {
-    width: 100%;
-    height: 80vh;
-    object-fit: cover;
-    opacity: 0.44;
-}
-
-/* New container for text over image */
-.homea .content {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    width: 90%;
-    max-width: 900px;
-    color: rgb(0, 0, 0);
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.homea .content h2 {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.homea .content ul {
-    list-style-type: disc;
-    text-align: left;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.homea .content ul li {
-    font-size: 20px;
-    /* margin-bottom: 10px; */
-    text-transform: none;
-}
-
-
-   </style>
+   <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
