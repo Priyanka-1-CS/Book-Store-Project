@@ -629,6 +629,10 @@ section.credit {
     text-align: center;
 }
 
+section.credit span {
+    font-weight: bold;
+}
+
 /* ----------------------------------------------------
    RESPONSIVE STYLES
 ---------------------------------------------------- */
