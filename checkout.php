@@ -149,6 +149,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($cart_items)) {
             margin-bottom: 10px;
             color: #2c3e50;
             font-size: 20px;
+            text-align: center;
+            text-transform: uppercase;
         }
 
         .order-table {
