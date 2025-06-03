@@ -24,20 +24,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_order'])) {
 // Fetch all orders for management
 try {
     $stmt = $pdo->query("
-        SELECT 
-    o.order_id,
-    o.name,
-    o.email,
-    o.order_date,
-    o.total_price,
-    o.payment_status,
-    GROUP_CONCAT(CONCAT(b.title, ' (x', oi.quantity, ')') SEPARATOR ', ') AS book_titles
-FROM orders o
-JOIN order_items oi ON o.order_id = oi.order_id
-JOIN books b ON oi.book_id = b.book_id
-GROUP BY o.order_id
+    SELECT 
+        o.order_id,
+        o.name,
+        o.email,
+        o.order_date,
+        o.total_price,
+        o.payment_status,
+        GROUP_CONCAT(CONCAT(b.title, ' (x', oi.quantity, ')') SEPARATOR ', ') AS book_titles
+    FROM orders o
+    JOIN order_items oi ON o.order_id = oi.order_id
+    JOIN books b ON oi.book_id = b.book_id
+    GROUP BY 
+        o.order_id,
+        o.name,
+        o.email,
+        o.order_date,
+        o.total_price,
+        o.payment_status
+");
 
-    ");
+
 
 } catch (PDOException $e) {
     echo "Error fetching orders: " . $e->getMessage();

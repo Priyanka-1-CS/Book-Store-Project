@@ -111,18 +111,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_payment_status
                     <th>Books Ordered</th>
                     <td>
                         <ul style="list-style-type: disc; padding-left: 20px;">
-                            <?php if (!empty($books)): ?>
-                                <?php foreach ($books as $book): ?>
-                                    <li>
-                                        <?= htmlspecialchars($book['title']) ?> 
-                                        by <?= htmlspecialchars($book['author']) ?> — 
-                                        <?= $book['quantity'] ?> × ₹<?= number_format($book['price'], 2) ?>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <li>No books found in this order.</li>
-                            <?php endif; ?>
-                        </ul>
+    <?php if (!empty($books)): ?>
+        <?php foreach ($books as $book): ?>
+            <li>
+                <?= htmlspecialchars($book['title']) ?> 
+                by <?= htmlspecialchars($book['author']) ?> — 
+                <?= $book['quantity'] ?> × ₹<?= number_format($book['price'], 2) ?>
+            </li>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <li>No books found in this order.</li>
+    <?php endif; ?>
+</ul>
+
                     </td>
                 </tr>
                 <tr><th>Order Date Time</th><td><?= htmlspecialchars($order['order_date']) ?></td></tr>
