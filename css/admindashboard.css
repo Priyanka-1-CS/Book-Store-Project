@@ -99,6 +99,22 @@ th, td {
 }
 
 /* Table Header Styling */
+.book-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.book-list th, .book-list td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.book-list th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+
 th {
     background-color: #4CAF50; /* Green background for header */
     color: white;
