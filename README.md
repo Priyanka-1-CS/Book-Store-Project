@@ -1,5 +1,5 @@
 # Book-Store-Project
-My Project Repository
+Project Repository
 
 <br>
 Author - Priyanka Mukherjee
